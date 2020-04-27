@@ -1,6 +1,6 @@
+import 'package:asew/widget/card.dart';
 import 'package:flutter/material.dart';
 
-import 'card.dart';
 
 class MainPage extends StatefulWidget {
   @override

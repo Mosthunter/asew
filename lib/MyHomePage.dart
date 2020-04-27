@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'Bookshelf.dart';
 import 'Download.dart';
 import 'MainPage.dart';
-import 'card.dart';
 
 class MyHomePage extends StatefulWidget {
   @override
