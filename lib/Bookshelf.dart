@@ -1,7 +1,6 @@
-import 'package:asew/scard.dart';
+import 'package:asew/widget/card.dart';
+import 'package:asew/widget/scard.dart';
 import 'package:flutter/material.dart';
-
-import 'card.dart';
 
 class Bookshelf extends StatefulWidget {
   @override
@@ -158,7 +157,6 @@ class _BookshelfState extends State<Bookshelf> {
                     ),
                     Scard(
                       data1: "100",
-              
                       data2: "525",
                     ),
                     Scard(
@@ -167,7 +165,10 @@ class _BookshelfState extends State<Bookshelf> {
                     )
                   ],
                 )),
-                Container(width: a.width,height: a.width/5,)
+            Container(
+              width: a.width,
+              height: a.width / 5,
+            )
           ],
         ));
   }
