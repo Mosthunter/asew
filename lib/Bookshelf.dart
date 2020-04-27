@@ -158,6 +158,7 @@ class _BookshelfState extends State<Bookshelf> {
                     ),
                     Scard(
                       data1: "100",
+              
                       data2: "525",
                     ),
                     Scard(
