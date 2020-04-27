@@ -12,8 +12,8 @@ class Readmoral extends StatefulWidget {
 
 class _ReadmoralState extends State<Readmoral> {
   ScrollController _scrollController;
-  String description =
-      """Undark was a trade name for luminous paint made with a mixture of radioactive radium and zinc sulfide, as produced by the U.S. Radium Corporation between 1917 and 1938. It was used primarily in watch and clock dials. The people working in the industry who applied the radioactive paint became known as the Radium Girls, because many of them became ill and some died from exposure to the radiation emitted by the radium contained within the product. The product was the direct cause of radium jaw in the dial painters. Undark was also available as a kit for general consumer use and marketed as glow-in-the-dark paint.""";
+  String readtext = """ """;
+  String urlPath = "";
   bool isPlaying = false;
   FlutterTts _flutterTts;
 
@@ -35,11 +35,9 @@ class _ReadmoralState extends State<Readmoral> {
     _flutterTts = FlutterTts();
 
     if (PlatformUtil.myPlatform() == MyPlatform.ANDROID) {
-      {setTtsLanguage();}
+      setTtsLanguage();
     } else if (PlatformUtil.myPlatform() == MyPlatform.IOS) {
       setTtsLanguage();
-    } else if (PlatformUtil.myPlatform() == MyPlatform.WEB) {
-      //not-supported by plugin
     }
 
     _flutterTts.setStartHandler(() {
@@ -156,7 +154,7 @@ class _ReadmoralState extends State<Readmoral> {
                   child: Container(
                     width: MediaQuery.of(context).size.width * 0.95,
                     color: Colors.green[100],
-                      child: Text(description,
+                      child: Text(readtext,
                       textAlign: TextAlign.left
                     ),
                   ),
@@ -186,7 +184,7 @@ class _ReadmoralState extends State<Readmoral> {
                 //fetch another image
                 setState(() {
                   //speechSettings1();
-                  isPlaying ? _stop() : _speak(description);
+                  isPlaying ? _stop() : _speak(readtext);
                 });
               },
               child: isPlaying
