@@ -1,7 +1,7 @@
-import 'package:asew/scard.dart';
+import 'package:asew/widget/scard.dart';
 import 'package:flutter/material.dart';
 
-import 'card.dart';
+import 'widget/card.dart';
 
 class Bookshelf extends StatefulWidget {
   @override
