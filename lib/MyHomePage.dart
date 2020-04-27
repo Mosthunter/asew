@@ -34,10 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     Size a = MediaQuery.of(context).size;
     return Scaffold(
-      drawer: Container(
-        width: a.width / 4,
-        color: Colors.white,
-      ),
+      
       body: Stack(
         children: <Widget>[
           Container(
