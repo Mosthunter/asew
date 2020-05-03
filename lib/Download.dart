@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee_widget/marquee_widget.dart';
+
 //mmmm
 class Download extends StatefulWidget {
   @override
@@ -151,10 +152,13 @@ class _DownloadState extends State<Download> {
                                           children: <Widget>[
                                             Row(
                                               mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: <Widget>[
-                                                Image.asset("images/1234.png",
-                                                    width: a.width / 12),
+                                                Icon(
+                                                  Icons.hearing,
+                                                  color: Colors.white,
+                                                ),
                                                 SizedBox(
                                                   width: a.width / 1.5,
                                                   child: Marquee(
@@ -219,11 +223,12 @@ class _DownloadState extends State<Download> {
                                                                         .spaceAround,
                                                                 children: <
                                                                     Widget>[
-                                                                  Image.asset(
-                                                                      "images/1234.png",
-                                                                      width:
-                                                                          a.width /
-                                                                              12),
+                                                                  Icon(
+                                                                    Icons
+                                                                        .hearing,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
                                                                   SizedBox(
                                                                     width:
                                                                         a.width /
@@ -260,7 +265,6 @@ class _DownloadState extends State<Download> {
                                                                   Row(
                                                                     children: <
                                                                         Widget>[
-                                                                      
                                                                       Container(
                                                                           child:
                                                                               InkWell(
@@ -302,7 +306,10 @@ class _DownloadState extends State<Download> {
                                                                                 Row(
                                                                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                   children: <Widget>[
-                                                                                    Image.asset("images/1234.png", width: a.width / 12),
+                                                                                    Icon(
+                                                                                      Icons.hearing,
+                                                                                      color: Colors.white,
+                                                                                    ),
                                                                                     SizedBox(
                                                                                       width: a.width / 1.5,
                                                                                       child: Marquee(
@@ -348,7 +355,7 @@ class _DownloadState extends State<Download> {
                                                                                                   Row(
                                                                                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                                                                                     children: <Widget>[
-                                                                                                      Image.asset("images/1234.png", width: a.width / 12),
+                                                                                                      Icon(Icons.hearing, color: Colors.white),
                                                                                                       SizedBox(
                                                                                                         width: a.width / 1.5,
                                                                                                         child: Marquee(
@@ -366,7 +373,6 @@ class _DownloadState extends State<Download> {
                                                                                                       ),
                                                                                                       Row(
                                                                                                         children: <Widget>[
-                                                                                                          
                                                                                                           Container(
                                                                                                               child: InkWell(
                                                                                                             child: Icon(Icons.keyboard_arrow_down, color: Colors.white),
