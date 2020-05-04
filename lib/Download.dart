@@ -263,6 +263,7 @@ class ReadBook extends StatefulWidget {
 }
 
 class _ReadBookState extends State<ReadBook> {
+  int page = 1;
   @override
   Widget build(BuildContext context) {
     Size a = MediaQuery.of(context).size;
@@ -345,19 +346,45 @@ class _ReadBookState extends State<ReadBook> {
                       children: [
                         Column(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: a.width / 40),
-                              width: a.width / 8,
-                              height: a.width / 8,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.circular(a.width / 20)),
-                              child: Icon(
-                                Icons.keyboard_arrow_left,
-                                color: Color(0xff0D9BFF),
-                              ),
-                            ),
+                            page == 1
+                                ? InkWell(
+                                    child: Container(
+                                      margin:
+                                          EdgeInsets.only(bottom: a.width / 40),
+                                      width: a.width / 8,
+                                      height: a.width / 8,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              a.width / 20)),
+                                      child: Icon(
+                                        Icons.keyboard_arrow_left,
+                                        color: Color(0xff0D9BFF),
+                                      ),
+                                    ),
+                                    onTap: () {},
+                                  )
+                                : InkWell(
+                                    child: Container(
+                                      margin:
+                                          EdgeInsets.only(bottom: a.width / 40),
+                                      width: a.width / 8,
+                                      height: a.width / 8,
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(
+                                              a.width / 20)),
+                                      child: Icon(
+                                        Icons.keyboard_arrow_left,
+                                        color: Color(0xff0D9BFF),
+                                      ),
+                                    ),
+                                    onTap: () {
+                                      setState(() {
+                                        page = page - 1;
+                                      });
+                                    },
+                                  ),
                             Text(
                               "กลับ",
                               style: TextStyle(color: Colors.white),
@@ -370,17 +397,22 @@ class _ReadBookState extends State<ReadBook> {
                           child: Column(
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(bottom: a.width / 40),
-                                  width: a.width / 4,
-                                  height: a.width / 8,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(a.width)
-                                          
-                                          ),
-                                  alignment: Alignment.center,
-                                  child: Text("12",style: TextStyle(color: Color(0xff0D9BFF),fontSize: a.width/25,fontWeight: FontWeight.bold),),),
+                                margin: EdgeInsets.only(bottom: a.width / 40),
+                                width: a.width / 4,
+                                height: a.width / 8,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius:
+                                        BorderRadius.circular(a.width)),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  page.toString(),
+                                  style: TextStyle(
+                                      color: Color(0xff0D9BFF),
+                                      fontSize: a.width / 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                               Text(
                                 "หน้า",
                                 style: TextStyle(color: Colors.white),
@@ -390,19 +422,25 @@ class _ReadBookState extends State<ReadBook> {
                         ),
                         Column(
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(bottom: a.width / 40),
-                              width: a.width / 8,
-                              height: a.width / 8,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius:
-                                      BorderRadius.circular(a.width / 20)),
-                              child: Icon(
-                                Icons.keyboard_arrow_right,
-                                color: Color(0xff0D9BFF),
-                              ),
-                            ),
+                            InkWell(
+                                child: Container(
+                                  margin: EdgeInsets.only(bottom: a.width / 40),
+                                  width: a.width / 8,
+                                  height: a.width / 8,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius:
+                                          BorderRadius.circular(a.width / 20)),
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right,
+                                    color: Color(0xff0D9BFF),
+                                  ),
+                                ),
+                                onTap: () {
+                                  setState(() {
+                                    page = page + 1;
+                                  });
+                                }),
                             Text(
                               "ต่อไป",
                               style: TextStyle(color: Colors.white),
