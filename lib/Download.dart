@@ -1,7 +1,16 @@
+import 'package:asew/Bookshelf.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee_widget/marquee_widget.dart';
+//TTS and PDF
+//import 'package:http/http.dart' as http;
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:path_provider/path_provider.dart';
+//import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'language.dart';
+import 'package:asew/platform/myplatform.dart';
+import 'package:asew/platform/platform.dart';
 
 //mmmm
 class Download extends StatefulWidget {
@@ -16,6 +25,84 @@ class _DownloadState extends State<Download> {
   Flushbar flush;
   bool _wasButtonClicked;
   var scaffoldKey = new GlobalKey<ScaffoldState>();
+  ///TTS Area
+  String read = "ฮากกาคันยิ โอเปร่า แซนด์วิชวินพรีเมียมบัส ดีไซน์โลโก้เอนทรานซ์พาเหรด ก๋ากั่นหมวยมัฟฟิน ยิมหงวนแฮมเบอร์เกอร์วิภัชภาคแผดเผา ไฮเวย์ล็อบบี้ติ่มซำแมมโบ้แพ็ค คันธาระล้มเหลวไคลแม็กซ์ เป็นไงจอหงวนตื้บเทียมทาน จูนแช่แข็งซิ้ม โหลน สโตนแจ๊กพ็อตรายชื่อซาดิสม์เสกสรรค์ สะบึมส์คอนโดมิเนียมไลฟ์อพาร์ทเมนต์ โบว์วอลนัตบ็อกซ์เฟิร์ม รีสอร์ท แซ็กโซโฟนเทปโปรเจ็กเตอร์";
+  bool isPlaying = false;
+  FlutterTts _flutterTts;
+
+  @override
+  void initState(){
+    super.initState();
+    moralTts();
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    _flutterTts.stop();
+  }
+
+  moralTts(){
+    _flutterTts = FlutterTts();
+
+    if (PlatformUtil.myPlatform() == MyPlatform.ANDROID) {
+    {
+        setTtsLanguage();
+      }
+    } else if (PlatformUtil.myPlatform() == MyPlatform.IOS) {
+      setTtsLanguage();
+    } else if (PlatformUtil.myPlatform() == MyPlatform.WEB) {
+      setTtsLanguage();
+    }
+
+    _flutterTts.setStartHandler(() {
+      setState(() {
+        isPlaying = true;
+      });
+    });
+
+    _flutterTts.setCompletionHandler(() {
+      setState(() {
+        isPlaying = false;
+      });
+    });
+
+    _flutterTts.setErrorHandler((err) {
+      setState(() {
+        print("พบปัญหา" + err + "ไม่สามารถเล่นได้");
+        isPlaying = false;
+      });
+    });
+  }
+
+  void setTtsLanguage() async {
+    await _flutterTts.setLanguage("th-TH");
+  }
+
+  void speechSettings1() {
+    _flutterTts.setVoice("th-th-x-sfg#male_1-local");
+    _flutterTts.setPitch(1.5);
+    _flutterTts.setSpeechRate(.9);
+  }
+
+  Future _speak(String text) async {
+    if (text != null && text.isNotEmpty) {
+      var result = await _flutterTts.speak(text);
+      if (result == 1)
+        setState(() {
+          isPlaying = true;
+        });
+    }
+  }
+
+  Future _stop() async {
+    var result = await _flutterTts.stop();
+    if (result == 1)
+      setState(() {
+        isPlaying = false;
+      });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size a = MediaQuery.of(context).size;
@@ -102,8 +189,8 @@ class _DownloadState extends State<Download> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Navigator.pop(context);
                                     setState(() {
+                                      _stop();
                                       d = 0;
                                     });
                                   })
@@ -135,13 +222,19 @@ class _DownloadState extends State<Download> {
                                     ),
                                   ),
                                   onPressed: () {
+                                    Navigator.push(
+                                        context, 
+                                      MaterialPageRoute(
+                                        builder: (context) => 
+                                        ReadBook()));
                                     setState(() {
+                                      isPlaying ? _stop() : _speak(read);
                                       d = 1;
                                     });
                                     flush = Flushbar<bool>(
                                       onTap: (flushbar) {
                                         setState(() {
-                                          d = 0;
+                                          d = 1;
                                         });
                                         Navigator.pop(context);
                                       },
@@ -197,11 +290,7 @@ class _DownloadState extends State<Download> {
                                                         Icons.keyboard_arrow_up,
                                                         color: Colors.white),
                                                     onTap: () {
-                                                      Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) =>
-                                                                  ReadBook()));
+
                                                     },
                                                   ))
                                                 ],
@@ -261,9 +350,10 @@ class ReadBook extends StatefulWidget {
   @override
   _ReadBookState createState() => _ReadBookState();
 }
-
+//Show PDF and TTS text
 class _ReadBookState extends State<ReadBook> {
   int page = 1;
+  String read = "ฮากกาคันยิ โอเปร่า แซนด์วิชวินพรีเมียมบัส ดีไซน์โลโก้เอนทรานซ์พาเหรด ก๋ากั่นหมวยมัฟฟิน ยิมหงวนแฮมเบอร์เกอร์วิภัชภาคแผดเผา ไฮเวย์ล็อบบี้ติ่มซำแมมโบ้แพ็ค คันธาระล้มเหลวไคลแม็กซ์ เป็นไงจอหงวนตื้บเทียมทาน จูนแช่แข็งซิ้ม โหลน สโตนแจ๊กพ็อตรายชื่อซาดิสม์เสกสรรค์ สะบึมส์คอนโดมิเนียมไลฟ์อพาร์ทเมนต์ โบว์วอลนัตบ็อกซ์เฟิร์ม รีสอร์ท แซ็กโซโฟนเทปโปรเจ็กเตอร์";
   @override
   Widget build(BuildContext context) {
     Size a = MediaQuery.of(context).size;
@@ -274,7 +364,7 @@ class _ReadBookState extends State<ReadBook> {
           width: a.width,
           height: a.width / 17,
         ),
-        Container(
+        /*Container(
           width: a.width,
           height: a.width / 8,
           padding: EdgeInsets.only(left: a.width / 20, right: a.width / 20),
@@ -286,7 +376,7 @@ class _ReadBookState extends State<ReadBook> {
                 Icons.hearing,
                 color: Colors.white,
               ),
-              Container(
+              /*Container(
                 width: a.width / 1.3,
                 alignment: Alignment.centerLeft,
                 child: SizedBox(
@@ -304,7 +394,7 @@ class _ReadBookState extends State<ReadBook> {
                     direction: Axis.horizontal,
                   ),
                 ),
-              ),
+              ),*/
               Row(
                 children: <Widget>[
                   Container(
@@ -318,7 +408,7 @@ class _ReadBookState extends State<ReadBook> {
               )
             ],
           ),
-        ),
+        ),*/
         Container(
           width: a.width,
           height: a.height / 1.1048,
@@ -464,7 +554,7 @@ class _ReadBookState extends State<ReadBook> {
                           width: a.width / 1.5,
                           child: Marquee(
                             child: Text(
-                              "nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn",
+                              read,
                               style: TextStyle(
                                   color: Colors.white, fontSize: a.width / 20),
                             ),

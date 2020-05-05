@@ -1,10 +1,6 @@
 import 'package:asew/widget/card.dart';
 import 'package:asew/widget/scard.dart';
 import 'package:flutter/material.dart';
-
-import 'package:asew/widget/scard.dart';
-import 'package:flutter/material.dart';
-
 import 'widget/card.dart';
 
 class Bookshelf extends StatefulWidget {
