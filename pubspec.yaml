@@ -30,6 +30,7 @@ dependencies:
   flutter_pdfview: ^1.0.1
   path_provider: ^1.6.7
   http: ^0.12.1
+  cloud_firestore: ^0.13.5
 
 dev_dependencies:
   flutter_test:

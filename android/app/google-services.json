@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "675107282315",
+    "firebase_url": "https://moralapp-database.firebaseio.com",
+    "project_id": "moralapp-database",
+    "storage_bucket": "moralapp-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675107282315:android:9a411ee3b8b9a1c42aa38e",
+        "android_client_info": {
+          "package_name": "com.example.asew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675107282315-7vfms8upiaomn0vb218u4a1ldbe5113e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJcy0Ozo5R9Z2pGUM7F9zXIaWwU3Cb-fg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675107282315-7vfms8upiaomn0vb218u4a1ldbe5113e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
