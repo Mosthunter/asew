@@ -24,17 +24,16 @@ class _MyHomePageState extends State<MyHomePage> {
       case 2:
         return Download();
         break;
-      
+
       default:
         return MainPage();
-
     }
   }
+
   @override
   Widget build(BuildContext context) {
     Size a = MediaQuery.of(context).size;
     return Scaffold(
-      
       body: Stack(
         children: <Widget>[
           Container(
@@ -46,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
             bottom: 0,
             child: Container(
               width: a.width,
-              height: a.width / 6,
+              height: a.width / 7,
               decoration: BoxDecoration(
                 color: Colors.white,
                 boxShadow: [
@@ -80,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget butBotBar(IconData icon, int select, String data, bool active) {
+    Size a = MediaQuery.of(context).size;
     return InkWell(
       child: Container(
         alignment: Alignment.center,
@@ -90,12 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
             Icon(
               icon,
               color: active ? Color(0xff1F82DA) : Color(0xff6F6F6F),
-              size: MediaQuery.of(context).size.width / 11,
+              size: MediaQuery.of(context).size.width / 13,
             ),
             Text(
               data,
               style: TextStyle(
-                  color: active ? Color(0xff1F82DA) : Color(0xff6F6F6F)),
+                  color: active ? Color(0xff1F82DA) : Color(0xff6F6F6F) ,fontSize: a.width/30),
             )
           ],
         ),
