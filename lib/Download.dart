@@ -1,20 +1,16 @@
-import 'package:asew/Bookshelf.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 //TTS and PDF
-//import 'package:http/http.dart' as http;
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:path_provider/path_provider.dart';
-//import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'language.dart';
 import 'package:asew/platform/myplatform.dart';
 import 'package:asew/platform/platform.dart';
 import 'ReadBook.dart';
+import 'ViewBook.dart';
 
-//mmmm
+//Download Page
 class Download extends StatefulWidget {
   @override
   _DownloadState createState() => _DownloadState();
@@ -28,7 +24,7 @@ class _DownloadState extends State<Download> {
   bool _wasButtonClicked;
   var scaffoldKey = new GlobalKey<ScaffoldState>();
 
-  ///TTS Area
+  ///TTS Functions
   bool isPlaying = false;
   FlutterTts _flutterTts;
 
@@ -82,7 +78,7 @@ class _DownloadState extends State<Download> {
   }
 
   void speechSettings1() {
-    _flutterTts.setVoice("th-th-x-sfg#male_1-local");
+    _flutterTts.setVoice("th-th-x-sfg#female_1-local");
     _flutterTts.setPitch(1.5);
     _flutterTts.setSpeechRate(.9);
   }
@@ -350,7 +346,13 @@ class _DownloadState extends State<Download> {
                                               ],
                                             ),
                                           ),
-                                          onPressed: () {})
+                                          onPressed: () {
+                                            Navigator.push(context,
+                                            MaterialPageRoute(
+                                              builder: (context) => ViewBook()
+                                              ),
+                                            );
+                                          })
                                     ],
                                   ),
                                 )
@@ -361,7 +363,7 @@ class _DownloadState extends State<Download> {
                       ],
                     ));
               } else {
-                return Center(child: Text("downloding..."));
+                return Center(child: Text("กำลังดาวน์โหลด..."));
               }
             })
       ],
