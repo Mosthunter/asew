@@ -113,6 +113,7 @@ class _DownloadState extends State<Download> {
     Size a = MediaQuery.of(context).size;
     Widget image_carousel = new Container(
         height: a.height / 1.765,
+        width: a.width,
         child: CarouselSlider(
           options: CarouselOptions(
             enlargeCenterPage: true,
@@ -266,43 +267,48 @@ class _DownloadState extends State<Download> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Container(
-                                child: Container(
-                                  width: a.width / 3,
-                                  height: a.width / 7.5,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        spreadRadius: 1,
-                                        blurRadius: 10,
-                                        offset: Offset(
-                                            0, 5), // changes position of shadow
-                                      ),
-                                    ],
-                                    color: Color(0xff1490E7),
-                                    borderRadius:
-                                        BorderRadius.circular(a.width / 50),
+                                child: InkWell(
+                                  child: Container(
+                                    width: a.width / 3,
+                                    height: a.width / 7.5,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 1,
+                                          blurRadius: 10,
+                                          offset: Offset(
+                                              0, 5), // changes position of shadow
+                                        ),
+                                      ],
+                                      color: Color(0xff1490E7),
+                                      borderRadius:
+                                          BorderRadius.circular(a.width / 50),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.surround_sound,
+                                          color: Colors.white,
+                                          size: a.width / 12,
+                                        ),
+                                        SizedBox(
+                                          width: a.width / 40,
+                                        ),
+                                        Text(
+                                          "ฟังเลย",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                              fontSize: a.width / 20),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.surround_sound,
-                                        color: Colors.white,
-                                        size: a.width / 12,
-                                      ),
-                                      SizedBox(
-                                        width: a.width / 40,
-                                      ),
-                                      Text(
-                                        "ฟังเลย",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.white,
-                                            fontSize: a.width / 20),
-                                      )
-                                    ],
-                                  ),
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReadBook(),));
+                                  },
                                 ),
                               ),
                               SizedBox(
