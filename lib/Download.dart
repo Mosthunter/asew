@@ -242,135 +242,118 @@ class _DownloadState extends State<Download> {
                       ),
                     )
                   : Container(),
-              Center(
-                child: Container(
-                  width: a.width,
-                  height: a.height / 1.4,
-                  child: Column(
-                    children: <Widget>[
-                      Container(
-                          alignment: Alignment.bottomCenter,
-                          height: a.width / 12,
-                          child: Text(
-                            "จำนวนหน้า" + " 146 " + "หน้า",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: a.width / 24),
-                          )),
-                      image_carousel,
-                      Container(
-                        width: a.width,
-                        height: a.width / 5,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                                child: d == 1
-                                    ? RaisedButton(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              a.width / 50),
-                                        ),
-                                        color: Color(0xff1490E7),
-                                        child: Container(
-                                          width: a.width / 4,
-                                          height: a.width / 8,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.pause_circle_filled,
-                                                color: Colors.white,
-                                                size: a.width / 10,
-                                              ),
-                                              Text(
-                                                "หยุด",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
-                                                    fontSize: a.width / 20),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        onPressed: () {})
-                                    : RaisedButton(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(
-                                              a.width / 50),
-                                        ),
-                                        color: Color(0xff1490E7),
-                                        child: Container(
-                                          width: a.width / 4,
-                                          height: a.width / 8,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: <Widget>[
-                                              Icon(
-                                                Icons.surround_sound,
-                                                color: Colors.white,
-                                                size: a.width / 12,
-                                              ),
-                                              Text(
-                                                "ฟังเลย",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
-                                                    fontSize: a.width / 20),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ReadBook(),
-                                              ));
-                                        })),
-                            SizedBox(
-                              width: a.width / 40,
-                            ),
-                            RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.circular(a.width / 50),
-                                ),
-                                color: Colors.white,
+               Center(
+                  child: Container(
+                    width: a.width,
+                    height: a.height / 1.3,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                            alignment: Alignment.bottomCenter,
+                            height: a.width / 12,
+                            child: Text(
+                              "จำนวนหน้า" + " 146 " + "หน้า",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: a.width / 24),
+                            )),
+                        image_carousel,
+                        Container(
+                          width: a.width,
+                          height: a.width / 5,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
                                 child: Container(
-                                  width: a.width / 4,
-                                  height: a.width / 8,
+                                  width: a.width / 3,
+                                  height: a.width / 7.5,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 10,
+                                        offset: Offset(
+                                            0, 5), // changes position of shadow
+                                      ),
+                                    ],
+                                    color: Color(0xff1490E7),
+                                    borderRadius:
+                                        BorderRadius.circular(a.width / 50),
+                                  ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       Icon(
-                                        Icons.chrome_reader_mode,
-                                        color: Color(0xff1490E7),
+                                        Icons.surround_sound,
+                                        color: Colors.white,
                                         size: a.width / 12,
                                       ),
+                                      SizedBox(
+                                        width: a.width / 40,
+                                      ),
                                       Text(
-                                        "อ่านเลย",
+                                        "ฟังเลย",
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            color: Color(0xfff1490E7),
+                                            color: Colors.white,
                                             fontSize: a.width / 20),
                                       )
                                     ],
                                   ),
                                 ),
-                                onPressed: () {})
-                          ],
-                        ),
-                      )
-                    ],
+                              ),
+                              SizedBox(
+                                width: a.width / 40,
+                              ),
+                              Container(
+                                width: a.width / 3,
+                                height: a.width / 7.5,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 10,
+                                      offset: Offset(
+                                          0, 5), // changes position of shadow
+                                    ),
+                                  ],
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(a.width / 50),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.chrome_reader_mode,
+                                      color: Color(0xff1490E7),
+                                      size: a.width / 12,
+                                    ),
+                                    SizedBox(
+                                      width: a.width / 40,
+                                    ),
+                                    Text(
+                                      "อ่านเลย",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xfff1490E7),
+                                          fontSize: a.width / 20),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              
             ],
           ))
     ]);

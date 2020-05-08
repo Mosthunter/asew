@@ -433,7 +433,11 @@ class _ReadBookState extends State<ReadBook> {
                   width: a.width / 1.6,
                   child: Marquee(
                     child: Text(
-                      "คุณกำลังฟัง " + "ธรรมนูญชุมชนสร้างสุขบนฐานที่สมบูรณ์",
+                      "คุณกำลังฟัง " +
+                          "ธรรมนูญชุมชนสร้างสุขบนฐานที่สมบูรณ์" +
+                          "          " +
+                          "คุณกำลังฟัง " +
+                          "ธรรมนูญชุมชนสร้างสุขบนฐานที่สมบูรณ์",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
