@@ -1,4 +1,5 @@
 import 'package:asew/Bookshelf.dart';
+import 'package:asew/PDFBOOKS.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flushbar/flushbar.dart';
@@ -243,78 +244,83 @@ class _DownloadState extends State<Download> {
                       ),
                     )
                   : Container(),
-               Center(
-                  child: Container(
-                    width: a.width,
-                    height: a.height / 1.3,
-                    child: Column(
-                      children: <Widget>[
-                        Container(
-                            alignment: Alignment.bottomCenter,
-                            height: a.width / 12,
-                            child: Text(
-                              "จำนวนหน้า" + " 146 " + "หน้า",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: a.width / 24),
-                            )),
-                        image_carousel,
-                        Container(
-                          width: a.width,
-                          height: a.width / 5,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                child: InkWell(
-                                  child: Container(
-                                    width: a.width / 3,
-                                    height: a.width / 7.5,
-                                    decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 1,
-                                          blurRadius: 10,
-                                          offset: Offset(
-                                              0, 5), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: Color(0xff1490E7),
-                                      borderRadius:
-                                          BorderRadius.circular(a.width / 50),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.surround_sound,
-                                          color: Colors.white,
-                                          size: a.width / 12,
-                                        ),
-                                        SizedBox(
-                                          width: a.width / 40,
-                                        ),
-                                        Text(
-                                          "ฟังเลย",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                              fontSize: a.width / 20),
-                                        )
-                                      ],
-                                    ),
+              Center(
+                child: Container(
+                  width: a.width,
+                  height: a.height / 1.3,
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                          alignment: Alignment.bottomCenter,
+                          height: a.width / 12,
+                          child: Text(
+                            "จำนวนหน้า" + " 146 " + "หน้า",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: a.width / 24),
+                          )),
+                      image_carousel,
+                      Container(
+                        width: a.width,
+                        height: a.width / 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              child: InkWell(
+                                child: Container(
+                                  width: a.width / 3,
+                                  height: a.width / 7.5,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 1,
+                                        blurRadius: 10,
+                                        offset: Offset(
+                                            0, 5), // changes position of shadow
+                                      ),
+                                    ],
+                                    color: Color(0xff1490E7),
+                                    borderRadius:
+                                        BorderRadius.circular(a.width / 50),
                                   ),
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => ReadBook(),));
-                                  },
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.surround_sound,
+                                        color: Colors.white,
+                                        size: a.width / 12,
+                                      ),
+                                      SizedBox(
+                                        width: a.width / 40,
+                                      ),
+                                      Text(
+                                        "ฟังเลย",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                            fontSize: a.width / 20),
+                                      )
+                                    ],
+                                  ),
                                 ),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ReadBook(),
+                                      ));
+                                },
                               ),
-                              SizedBox(
-                                width: a.width / 40,
-                              ),
-                              Container(
+                            ),
+                            SizedBox(
+                              width: a.width / 40,
+                            ),
+                            InkWell(
+                              child: Container(
                                 width: a.width / 3,
                                 height: a.width / 7.5,
                                 decoration: BoxDecoration(
@@ -352,14 +358,21 @@ class _DownloadState extends State<Download> {
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PDFBOOKS(),
+                                    ));
+                              },
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              
+              ),
             ],
           ))
     ]);
