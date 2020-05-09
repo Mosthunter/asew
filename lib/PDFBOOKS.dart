@@ -1,6 +1,15 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:http/http.dart' as http;
 
 class PDFBOOKS extends StatefulWidget {
+  final String path;
+  const PDFBOOKS({Key key, this.path}) : super(key: key);
   @override
   _PDFBOOKSState createState() => _PDFBOOKSState();
 }
@@ -8,6 +17,53 @@ class PDFBOOKS extends StatefulWidget {
 class _PDFBOOKSState extends State<PDFBOOKS> {
   int page = 1;
   int favorite = 0;
+  String assetPath = "";
+  String urlPath = "";
+  int totalPg = 0;
+  bool pdfReady = false;
+  PDFViewController _pdfViewController;
+  @override
+  void initState(){
+    super.initState();
+
+    getFromAsset("assets/guide.pdf").then((f) {
+      setState(() {
+        assetPath = f.path;
+      });
+    });
+
+    getFromUrl("https://pdfkit.org/docs/guide.pdf").then((f) {
+      setState(() {
+        urlPath = f.path;
+      });
+    });
+  }
+  Future<File> getFromAsset(String asset) async {
+    try {
+      var data = await rootBundle.load(asset);
+      var bytes = data.buffer.asUint8List();
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/mypdf.pdf");
+      
+      File assetFile = await file.writeAsBytes(bytes);
+      return assetFile;
+    } catch (e){
+      throw Exception("ไม่สามารถเปิดไฟล์ที่ดาวน์โหลดมาได้");
+    }
+  }
+    Future<File> getFromUrl(String url) async {
+    try {
+      var data = await http.get(url);
+      var bytes = data.bodyBytes;
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/mypdfonline.pdf");
+      
+      File urlFile = await file.writeAsBytes(bytes);
+      return urlFile;
+    } catch (e){
+      throw Exception("ไม่สามารถเปิดไฟล์จากเซิร์ฟเวอร์ได้");
+    }
+  }
   @override
   Widget build(BuildContext context) {
     Size a = MediaQuery.of(context).size;
@@ -18,15 +74,39 @@ class _PDFBOOKSState extends State<PDFBOOKS> {
             width: a.width,
             height: a.height,
             color: Colors.grey,
-            child: Center(
-              child: Text(
-                "PDF READER",
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: a.width / 10,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+            child: Row(
+              children: <Widget>[
+                PDFView(
+            filePath: widget.path,
+            autoSpacing: true,
+            enableSwipe: true,
+            pageSnap: true,
+            swipeHorizontal: true,
+            nightMode: false,
+            onError: (e) {
+              print(e);
+            },
+            onRender: (_pages) {
+              setState(() {
+                totalPg = _pages;
+                pdfReady = true;
+              });
+            },
+            onViewCreated: (PDFViewController vc) {
+              _pdfViewController = vc;
+            },
+            onPageChanged: (int page, int total) {
+              setState(() {});
+            },
+            onPageError: (page, e) {},
+          ),
+          !pdfReady
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Offstage()
+        ],
+            )
           ),
           Positioned(
             top: 0,
@@ -203,6 +283,7 @@ class _PDFBOOKSState extends State<PDFBOOKS> {
                                       ),
                                     ),
                                     onTap: () {
+                                      if (page >= 1)
                                       setState(() {
                                         page = page - 1;
                                       });
@@ -293,6 +374,7 @@ class _PDFBOOKSState extends State<PDFBOOKS> {
                                   ),
                                 ),
                                 onTap: () {
+                                  if (page+1 < totalPg)
                                   setState(() {
                                     page = page + 1;
                                   });

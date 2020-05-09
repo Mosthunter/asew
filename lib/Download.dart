@@ -1,10 +1,9 @@
-import 'package:asew/Bookshelf.dart';
 import 'package:asew/PDFBOOKS.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 import 'ReadBook.dart';
-import 'ViewBook.dart';
+import 'package:path_provider/path_provider.dart';
 //mmmm
 class Download extends StatefulWidget {
   @override
@@ -16,9 +15,6 @@ class _DownloadState extends State<Download> {
   //ตัวแปร d คือ เปลี่ยนแปลง ปุ่ม ฟังเลย เป็น หยุด และ จากหยุด เป็น ฟังเลย
   int d = 0;
   int page = 0;
-
-  // var read = "ฮากกาคันยิ โอเปร่า แซนด์วิชวินพรีเมียมบัส ดีไซน์โลโก้เอนทรานซ์พาเหรด ก๋ากั่นหมวยมัฟฟิน ยิมหงวนแฮมเบอร์เกอร์วิภัชภาคแผดเผา ไฮเวย์ล็อบบี้ติ่มซำแมมโบ้แพ็ค คันธาระล้มเหลวไคลแม็กซ์ เป็นไงจอหงวนตื้บเทียมทาน จูนแช่แข็งซิ้ม โหลน สโตนแจ๊กพ็อตรายชื่อซาดิสม์เสกสรรค์ สะบึมส์คอนโดมิเนียมไลฟ์อพาร์ทเมนต์ โบว์วอลนัตบ็อกซ์เฟิร์ม รีสอร์ท แซ็กโซโฟนเทปโปรเจ็กเตอร์"Flushbar flush;
-  bool _wasButtonClicked;
   var scaffoldKey = new GlobalKey<ScaffoldState>();
 
   //widget image_carousel สำหรับเรียกใช้
