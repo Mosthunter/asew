@@ -1,6 +1,5 @@
 import 'package:asew/platform/mobile.dart';
 import 'package:asew/platform/myplatform.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:marquee_widget/marquee_widget.dart';
@@ -13,7 +12,7 @@ class ReadBook extends StatefulWidget {
 //Show PDF and TTS text
 class _ReadBookState extends State<ReadBook> {
   int page = 1;
-  int d = 0;
+  int status = 0;
   bool isPlaying = false;
   var read =
       "ฮากกาคันยิ โอเปร่า แซนด์วิชวินพรีเมียมบัส ดีไซน์โลโก้เอนทรานซ์พาเหรด ก๋ากั่นหมวยมัฟฟิน ยิมหงวนแฮมเบอร์เกอร์วิภัชภาคแผดเผา ไฮเวย์ล็อบบี้ติ่มซำแมมโบ้แพ็ค คันธาระล้มเหลวไคลแม็กซ์ เป็นไงจอหงวนตื้บเทียมทาน จูนแช่แข็งซิ้ม โหลน สโตนแจ๊กพ็อตรายชื่อซาดิสม์เสกสรรค์ สะบึมส์คอนโดมิเนียมไลฟ์อพาร์ทเมนต์ โบว์วอลนัตบ็อกซ์เฟิร์ม รีสอร์ท แซ็กโซโฟนเทปโปรเจ็กเตอร์";
@@ -58,7 +57,7 @@ class _ReadBookState extends State<ReadBook> {
 
     _flutterTts.setErrorHandler((err) {
       setState(() {
-        print("พบปัญหา" + err + "ไม่สามารถเล่นได้");
+        print("มีปัญหา ไม่สามารถเล่นได้");
         isPlaying = false;
       });
     });
@@ -68,9 +67,9 @@ class _ReadBookState extends State<ReadBook> {
     await _flutterTts.setLanguage("th-TH");
   }
 
-  void speechSettings1() {
+  void speechSettings() {
     _flutterTts.setVoice("th-th-x-sfg#male_1-local");
-    _flutterTts.setPitch(1.5);
+    _flutterTts.setPitch(1);
     _flutterTts.setSpeechRate(.9);
   }
 
@@ -142,21 +141,8 @@ class _ReadBookState extends State<ReadBook> {
                                     color: Color(0xff0D9BFF),
                                     borderRadius:
                                         BorderRadius.circular(a.width)),
-                                child: d == 0
+                                child: status == 0
                                     ? InkWell(
-                                        child: Icon(
-                                          Icons.pause_circle_filled,
-                                          color: Colors.white,
-                                          size: a.width / 13,
-                                        ),
-                                        onTap: () {
-                                          setState(() {
-                                            d = 1;
-                                            isPlaying ? _stop() : _speak(read);
-                                          });
-                                        },
-                                      )
-                                    : InkWell(
                                         child: Icon(
                                           Icons.play_circle_filled,
                                           color: Colors.white,
@@ -164,7 +150,20 @@ class _ReadBookState extends State<ReadBook> {
                                         ),
                                         onTap: () {
                                           setState(() {
-                                            d = 0;
+                                            status = 1;
+                                            isPlaying ? _stop() : _speak(read);
+                                          });
+                                        },
+                                      )
+                                    : InkWell(
+                                        child: Icon(
+                                          Icons.pause_circle_filled,
+                                          color: Colors.white,
+                                          size: a.width / 13,
+                                        ),
+                                        onTap: () {
+                                          setState(() {
+                                            status = 0;
                                             isPlaying ? _stop() : _speak(read);
                                           });
                                         },
