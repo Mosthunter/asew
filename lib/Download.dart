@@ -1,9 +1,17 @@
-import 'package:asew/PDFBOOKS.dart';
+import 'package:asew/ViewBook.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 import 'ReadBook.dart';
 import 'package:path_provider/path_provider.dart';
+import 'dart:async';
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:http/http.dart' as http;
+
 //mmmm
 class Download extends StatefulWidget {
   @override
@@ -16,6 +24,55 @@ class _DownloadState extends State<Download> {
   int d = 0;
   int page = 0;
   var scaffoldKey = new GlobalKey<ScaffoldState>();
+  String assetPDFPath = "";
+  String urlPDFPath = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    getFileFromAsset("images/guide.pdf").then((f) {
+      setState(() {
+        assetPDFPath = f.path;
+        print(assetPDFPath);
+      });
+    });
+
+    getFileFromUrl("https://pdfkit.org/docs/guide.pdf").then((f) {
+      setState(() {
+        urlPDFPath = f.path;
+        print(urlPDFPath);
+      });
+    });
+  }
+
+  Future<File> getFileFromAsset(String asset) async {
+    try {
+      var data = await rootBundle.load(asset);
+      var bytes = data.buffer.asUint8List();
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/mypdf.pdf");
+
+      File assetFile = await file.writeAsBytes(bytes);
+      return assetFile;
+    } catch (e) {
+      throw Exception("Error opening asset file");
+    }
+  }
+
+  Future<File> getFileFromUrl(String url) async {
+    try {
+      var data = await http.get(url);
+      var bytes = data.bodyBytes;
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/mypdfonline.pdf");
+
+      File urlFile = await file.writeAsBytes(bytes);
+      return urlFile;
+    } catch (e) {
+      throw Exception("Error opening url file");
+    }
+  }
 
   //widget image_carousel สำหรับเรียกใช้
   @override
@@ -33,7 +90,7 @@ class _DownloadState extends State<Download> {
               print(index);
             },
           ),
-          items: ["images/book1.png", "images/asean.png", "images/noodee.png"]
+          items: ["images/noodee.png", "images/asean.png", "images/book1.png"]
               .map((i) {
             Size a = MediaQuery.of(context).size;
             return Container(
@@ -268,11 +325,14 @@ class _DownloadState extends State<Download> {
                                 ),
                               ),
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PDFBOOKS(),
-                                    ));
+                                if (assetPDFPath != null) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => PdfViewPage(
+                                              path:
+                                                  urlPDFPath))); //ถ้าดึง pdf จาก url ใช้ urlPDFPath แต่ถ้าดึงมาจาก images/ ใช้ assetsPDFPath
+                                }
                               },
                             ),
                           ],
