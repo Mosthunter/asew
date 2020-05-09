@@ -3,7 +3,7 @@ import 'package:asew/platform/myplatform.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:marquee_widget/marquee_widget.dart';
-
+import 'books.dart';
 class ReadBook extends StatefulWidget {
   @override
   _ReadBookState createState() => _ReadBookState();
@@ -14,7 +14,7 @@ class _ReadBookState extends State<ReadBook> {
   int page = 1;
   int status = 0;
   bool isPlaying = false;
-  var read =
+  var read = 
       "ฮากกาคันยิ โอเปร่า แซนด์วิชวินพรีเมียมบัส ดีไซน์โลโก้เอนทรานซ์พาเหรด ก๋ากั่นหมวยมัฟฟิน ยิมหงวนแฮมเบอร์เกอร์วิภัชภาคแผดเผา ไฮเวย์ล็อบบี้ติ่มซำแมมโบ้แพ็ค คันธาระล้มเหลวไคลแม็กซ์ เป็นไงจอหงวนตื้บเทียมทาน จูนแช่แข็งซิ้ม โหลน สโตนแจ๊กพ็อตรายชื่อซาดิสม์เสกสรรค์ สะบึมส์คอนโดมิเนียมไลฟ์อพาร์ทเมนต์ โบว์วอลนัตบ็อกซ์เฟิร์ม รีสอร์ท แซ็กโซโฟนเทปโปรเจ็กเตอร์";
   FlutterTts _flutterTts;
 
@@ -210,7 +210,13 @@ class _ReadBookState extends State<ReadBook> {
                                           size: a.width / 15,
                                         ),
                                       ),
-                                      onTap: () {},
+                                      onTap: () {
+                                        setState(() {
+                                          if(page>1)
+                                            page = page - 1;
+                                            _speak(read);
+                                          });
+                                      },
                                     ),
                                     Text(
                                       "กลับ",
@@ -302,6 +308,7 @@ class _ReadBookState extends State<ReadBook> {
                                         onTap: () {
                                           setState(() {
                                             page = page + 1;
+                                            _speak(read);
                                           });
                                         }),
                                     Text(
