@@ -1,16 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee_widget/marquee_widget.dart';
-//TTS and PDF
-import 'package:flutter_tts/flutter_tts.dart';
-import 'package:asew/platform/myplatform.dart';
-import 'package:asew/platform/platform.dart';
 import 'ReadBook.dart';
 import 'ViewBook.dart';
-
-//Download Page
+//mmmm
 class Download extends StatefulWidget {
   @override
   _DownloadState createState() => _DownloadState();
@@ -25,83 +18,6 @@ class _DownloadState extends State<Download> {
   // var read = "ฮากกาคันยิ โอเปร่า แซนด์วิชวินพรีเมียมบัส ดีไซน์โลโก้เอนทรานซ์พาเหรด ก๋ากั่นหมวยมัฟฟิน ยิมหงวนแฮมเบอร์เกอร์วิภัชภาคแผดเผา ไฮเวย์ล็อบบี้ติ่มซำแมมโบ้แพ็ค คันธาระล้มเหลวไคลแม็กซ์ เป็นไงจอหงวนตื้บเทียมทาน จูนแช่แข็งซิ้ม โหลน สโตนแจ๊กพ็อตรายชื่อซาดิสม์เสกสรรค์ สะบึมส์คอนโดมิเนียมไลฟ์อพาร์ทเมนต์ โบว์วอลนัตบ็อกซ์เฟิร์ม รีสอร์ท แซ็กโซโฟนเทปโปรเจ็กเตอร์"Flushbar flush;
   bool _wasButtonClicked;
   var scaffoldKey = new GlobalKey<ScaffoldState>();
-
-  ///TTS Functions
-  bool isPlaying = false;
-  FlutterTts _flutterTts;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   moralTts();
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   _flutterTts.stop();
-  // }
-
-  // moralTts() {
-  //   _flutterTts = FlutterTts();
-
-  //   if (PlatformUtil.myPlatform() == MyPlatform.ANDROID) {
-  //     {
-  //       setTtsLanguage();
-  //     }
-  //   } else if (PlatformUtil.myPlatform() == MyPlatform.IOS) {
-  //     setTtsLanguage();
-  //   } else if (PlatformUtil.myPlatform() == MyPlatform.WEB) {
-  //     setTtsLanguage();
-  //   }
-
-  //   _flutterTts.setStartHandler(() {
-  //     setState(() {
-  //       isPlaying = true;
-  //     });
-  //   });
-
-  //   _flutterTts.setCompletionHandler(() {
-  //     setState(() {
-  //       isPlaying = false;
-  //     });
-  //   });
-
-  //   _flutterTts.setErrorHandler((err) {
-  //     setState(() {
-  //       print("พบปัญหา" + err + "ไม่สามารถเล่นได้");
-  //       isPlaying = false;
-  //     });
-  //   });
-  // }
-
-  // void setTtsLanguage() async {
-  //   await _flutterTts.setLanguage("th-TH");
-  // }
-
-  void speechSettings1() {
-    _flutterTts.setVoice("th-th-x-sfg#female_1-local");
-    _flutterTts.setPitch(1.5);
-    _flutterTts.setSpeechRate(.9);
-  }
-
-  // Future _speak(String text) async {
-  //   if (text != null && text.isNotEmpty) {
-  //     var result = await _flutterTts.speak(text);
-  //     if (result == 1)
-  //       setState(() {
-  //         isPlaying = true;
-  //       });
-  //   }
-  // }
-
-  // Future _stop() async {
-  //   var result = await _flutterTts.stop();
-  //   if (result == 1)
-  //     setState(() {
-  //       isPlaying = false;
-  //     });
-  // }
 
   //widget image_carousel สำหรับเรียกใช้
   @override
@@ -341,149 +257,22 @@ class _DownloadState extends State<Download> {
                                     Text(
                                       "อ่านเลย",
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: a.width / 25),
-                                    )),
-                                image_carousel,
-                                Container(
-                                  margin: EdgeInsets.only(top: a.width / 20),
-                                  width: a.width,
-                                  height: a.width / 5,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      Container(
-                                          child: d == 1
-                                              ? RaisedButton(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            a.width / 50),
-                                                  ),
-                                                  color: Color(0xff1490E7),
-                                                  child: Container(
-                                                    width: a.width / 4,
-                                                    height: a.width / 8,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: <Widget>[
-                                                        Icon(
-                                                          Icons
-                                                              .pause_circle_filled,
-                                                          color: Colors.white,
-                                                          size: a.width / 12,
-                                                        ),
-                                                        Text(
-                                                          "หยุด",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  a.width / 22),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      _stop();
-                                                      d = 0;
-                                                    });
-                                                  })
-                                              : RaisedButton(
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            a.width / 50),
-                                                  ),
-                                                  color: Color(0xff1490E7),
-                                                  child: Container(
-                                                    width: a.width / 4,
-                                                    height: a.width / 8,
-                                                    child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      children: <Widget>[
-                                                        Icon(
-                                                          Icons.surround_sound,
-                                                          color: Colors.white,
-                                                          size: a.width / 12,
-                                                        ),
-                                                        Text(
-                                                          "ฟังเลย",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize:
-                                                                  a.width / 22),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ),
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      isPlaying
-                                                          ? _stop()
-                                                          : _speak(snapshot.data
-                                                                  .documents[0]
-                                                              ['Read']);
-                                                      d = 1;
-                                                    });
-                                                  })),
-                                      SizedBox(
-                                        width: a.width / 40,
-                                      ),
-                                      RaisedButton(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(
-                                                a.width / 50),
-                                          ),
-                                          color: Colors.white,
-                                          child: Container(
-                                            width: a.width / 4,
-                                            height: a.width / 8,
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: <Widget>[
-                                                Icon(
-                                                  Icons.chrome_reader_mode,
-                                                  color: Color(0xff1490E7),
-                                                  size: a.width / 12,
-                                                ),
-                                                Text(
-                                                  "อ่านเลย",
-                                                  style: TextStyle(
-                                                      color: Color(0xfff1490E7),
-                                                      fontSize: a.width / 22),
-                                                )
-                                              ],
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.push(context,
-                                            MaterialPageRoute(
-                                              builder: (context) => ViewBook()
-                                              ),
-                                            );
-                                          })
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
+                                          fontWeight: FontWeight.bold,
+                                          color: Color(0xfff1490E7),
+                                          fontSize: a.width / 20),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
                         )
                       ],
-                    ));
-              } else {
-                return Center(child: Text("กำลังดาวน์โหลด..."));
-              }
-            })
-      ],
-    );
+                    ),
+                  ),
+                ),
+            ],
+          ))
+    ]);
   }
 }
