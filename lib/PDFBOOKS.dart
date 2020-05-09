@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:http/http.dart' as http;
+import 'ReadBook.dart';
 
 class PDFBOOKS extends StatefulWidget {
   final String path;
@@ -74,39 +75,6 @@ class _PDFBOOKSState extends State<PDFBOOKS> {
             width: a.width,
             height: a.height,
             color: Colors.grey,
-            child: Row(
-              children: <Widget>[
-                PDFView(
-            filePath: widget.path,
-            autoSpacing: true,
-            enableSwipe: true,
-            pageSnap: true,
-            swipeHorizontal: true,
-            nightMode: false,
-            onError: (e) {
-              print(e);
-            },
-            onRender: (_pages) {
-              setState(() {
-                totalPg = _pages;
-                pdfReady = true;
-              });
-            },
-            onViewCreated: (PDFViewController vc) {
-              _pdfViewController = vc;
-            },
-            onPageChanged: (int page, int total) {
-              setState(() {});
-            },
-            onPageError: (page, e) {},
-          ),
-          !pdfReady
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Offstage()
-        ],
-            )
           ),
           Positioned(
             top: 0,
@@ -206,13 +174,13 @@ class _PDFBOOKSState extends State<PDFBOOKS> {
                           ],
                         ),
                         Column(
-                          children: [
+                          /*children: [
                             Icon(Icons.volume_up, color: Colors.white),
                             Text("เปิดเสียง",
                                 style: TextStyle(
                                   color: Colors.white,
                                 ))
-                          ],
+                          ],*/
                         )
                       ],
                     ),
@@ -283,7 +251,6 @@ class _PDFBOOKSState extends State<PDFBOOKS> {
                                       ),
                                     ),
                                     onTap: () {
-                                      if (page >= 1)
                                       setState(() {
                                         page = page - 1;
                                       });
@@ -374,7 +341,6 @@ class _PDFBOOKSState extends State<PDFBOOKS> {
                                   ),
                                 ),
                                 onTap: () {
-                                  if (page+1 < totalPg)
                                   setState(() {
                                     page = page + 1;
                                   });
