@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 
-
 class PdfViewPage extends StatefulWidget {
   final String path;
 
@@ -38,7 +37,6 @@ class _PdfViewPageState extends State<PdfViewPage> {
               setState(() {
                 _totalPages = _pages;
                 pdfReady = true;
-        
               });
             },
             onViewCreated: (PDFViewController vc) {
@@ -46,7 +44,7 @@ class _PdfViewPageState extends State<PdfViewPage> {
             },
             onPageChanged: (int page, int total) {
               setState(() {
-                _currentPage = page ;
+                _currentPage = page;
               });
               print(_currentPage);
             },
