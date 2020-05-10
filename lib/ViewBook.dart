@@ -28,7 +28,7 @@ class _PdfViewPageState extends State<PdfViewPage> {
             filePath: widget.path,
             autoSpacing: true,
             enableSwipe: true,
-            pageSnap: true,
+            pageSnap: false,
             swipeHorizontal: true,
             nightMode: false,
             onError: (e) {
@@ -38,13 +38,17 @@ class _PdfViewPageState extends State<PdfViewPage> {
               setState(() {
                 _totalPages = _pages;
                 pdfReady = true;
+        
               });
             },
             onViewCreated: (PDFViewController vc) {
               _pdfViewController = vc;
             },
             onPageChanged: (int page, int total) {
-              setState(() {});
+              setState(() {
+                _currentPage = page ;
+              });
+              print(_currentPage);
             },
             onPageError: (page, e) {},
           ),
